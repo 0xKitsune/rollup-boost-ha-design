@@ -28,14 +28,13 @@ With the introduction of `rollup-boost`, an additional component is introduced t
 This design document outlines the architecture, components, and failure strategies required for HA `rollup-boost`. The proposed design prioritizes fault tolerance, liveliness, horizontal scalability, and minimal failover time while maintaining upstream compatibility with `op-conductor`.
 
 ## Goals
-
 - Explore HA designs for `rollup-boost` prioritizing liveliness, fault tolerance and horizontal scalability for external block builders.
 - Maintain compatibility with `op-conductor` and its sequencing assumptions.
 
 ## Non Goals
-
 - Define how Flashblocks are handled, consumed or streamed to the network.
-- Define how pending transactions are relayed/ specified in a separate document once an architecture is solidified.
+- Define how pending transactions are relayed/peered across the builders/sequencer execution clients.
+- Monitoring / alerting strategies. This can be specified in a separate document once an architecture is solidified.
 
 # Designs
 
