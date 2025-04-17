@@ -52,7 +52,7 @@ This approach is operationally simple and relies on the same liveness and fault 
 
 Note that `rollup-boost` does not currently feature a block selection policy and will optimistically select the builder's block for validation. In the event of a bug in the builder, it is possible valid but undesirable blocks (eg. empty blocks) are produced. Without a block selection policy, `rollup-boost` will prefer these blocks over the default execution client. Proper monitoring alerting can help mitigate this but further designs should be explored to introduce safeguards into `rollup-boost` directly rather than relying on the builder implementation being correct.
 
-Below is a happy-path sequence diagram illustrating how `rollup-boost` facilitates payload construction/validation:
+Below is a happy path sequence diagram illustrating how `rollup-boost` facilitates payload construction/validation:
 
 ```mermaid
 sequenceDiagram
@@ -139,7 +139,7 @@ In this HA design, each `rollup-boost` instance is configured to point at the sa
 
 While each builder will have its own local `op-node`, to minimize latency and keep builders at the tip, after successful validation of the newly built block `rollup-boost` will forward the `new_payload` request to the builders, rather than relying on each builder to sync state through its own `op-node`.
 
-Below is a happy-path sequence diagram illustrating how `rollup-boost` interacts with multiple builders during payload construction/validation. Note that this is exactly the same as 1:1 `rollup-boost` <-> builder block production, with the addition of a block selection policy:
+Below is a happy path sequence diagram illustrating how `rollup-boost` interacts with multiple builders during payload construction/validation. Note that this is exactly the same as 1:1 `rollup-boost` <-> builder block production, with the addition of a block selection policy:
 
 ```mermaid
 sequenceDiagram
@@ -237,7 +237,7 @@ This design is also fully compatible with upstream `op-conductor` and requires n
 
 In the failure case where `op-conductor` fails to send a `stopSequencing` call in time resulting in two FCUs with payload attributes, the builder load balancer could feature logic to dedup/ignore the additional payload, avoiding the issue of having more than one CL drive the EL at a time.
 
-Below is a happy-path sequence diagram illustrating payload construction/validation:
+Below is a happy path sequence diagram illustrating payload construction/validation:
 
 ```mermaid
 sequenceDiagram
