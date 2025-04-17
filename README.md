@@ -261,8 +261,10 @@ sequenceDiagram
     RB->>EL: engine_getPayload(PayloadId)
     RB->>LB: engine_getPayload(PayloadId)
     LB->>B: engine_getPayload(PayloadId)
-    LB-->>RB: {executionPayload, blockValue}
+    B-->>LB: {executionPayload, blockValue}
     LB->>LB: Select healthy builder block 
+    LB-->>RB: {executionPayload, blockValue}
+    EL-->>RB: {executionPayload, blockValue}
 
     %% block selection policy
     RB->>RB: Optimistically select builder block 
